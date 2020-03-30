@@ -9,13 +9,13 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, prevRoll;
 
 scores = [0, 0];
 roundScore = 0;
 activePlayer = 0;
 gamePlaying = true;
-
+prevRoll = 0;
 
 // document.querySelector('#current-' + activePlayer).textContent = dice;
 // CSS ID: current-1
@@ -43,9 +43,18 @@ document.getElementById('current-1').textContent = '0';
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
     //called an anonymous function, does smt here
+
     if (gamePlaying) {
         // 1. random number
         var dice = Math.floor(Math.random() * 6) + 1;
+
+        if (dice == 6 && prevRoll == 6) {
+            alert("rolled 2 6s idiot");
+            nextPlayer();
+            return;
+        } else {
+            prevRoll = dice; 
+        }
 
         // 2. display the result
         var diceDOM = document.querySelector('.dice');
@@ -57,6 +66,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
             roundScore += dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         } else {
+            // alert("rolled 1 idiot");
             nextPlayer();
         }
     }
