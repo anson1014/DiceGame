@@ -17,6 +17,7 @@ activePlayer = 0;
 gamePlaying = true;
 prevRoll = 0;
 
+
 // document.querySelector('#current-' + activePlayer).textContent = dice;
 // CSS ID: current-1
 
@@ -80,10 +81,12 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
         // Update the UI
         document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
 
-        
+        var input = document.querySelector('.final-score').value;
+
+        var winVal = (input)? input : 100;
 
         // Check if the player won the game
-        if (scores[activePlayer] >= 10) {
+        if (scores[activePlayer] >= winVal) {
             document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
             document.querySelector('.dice').style.display = 'none';
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
